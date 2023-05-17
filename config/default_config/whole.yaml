@@ -1,0 +1,26 @@
+#群通知类
+groupMessage: false #群消息
+grouptemporaryMessage: false #群临时消息
+groupRecall: false #群撤回
+groupInviteRequest: true #群邀请
+groupAdminChange: false #群管理变动
+groupNumberChange: true #群聊列表变动
+groupMemberNumberChange: false #群成员变动
+addGroupApplication: false #加群申请
+#好友通知类
+privateMessage: true #好友消息
+PrivateRecall: false #好友撤回
+friendRequest: true #好友申请
+friendNumberChange: true #好友列表变动
+#其他通知
+Strangers_love: false #陌生人点赞
+flashPhoto: false #闪照
+input: false #对方正在输入
+botBeenBanned: true #禁言
+#系统设置
+noticeAll: false #全部消息通知
+notificationsAll: false #通知发送给全部主人
+state: false #作为默认状态
+statusTask: false #状态网速定时器
+deltime: 600 #删除缓存
+renderScale: 100 #渲染精度
