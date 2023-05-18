@@ -7,9 +7,7 @@
 1. 推荐使用git进行安装，以方便后续升级。在bot文件夹根目录打开GIT终端，执行一下命令
 
 ```
-// 使用github
 git clone --depth=1 https://github.com/subreast/peach-plugin.git ./plugins/peach-plugin
-
 ```
 
 2. 安装依赖(可选：不安装依赖将无法使用一些功能)
