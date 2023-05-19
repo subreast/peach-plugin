@@ -23,12 +23,12 @@ export default class {
    * @param {string|number} groupId - 群号
    * @param {string|number} userId - 被禁言人 QQ 号
    * @param {string|number} executor - 执行操作的管理员 QQ 号
-   * @param {number} [time=5] - 禁言时长，默认为 5。如果传入 0 则表示解除禁言。
-   * @param {string} [unit='分'] - 禁言时长单位，默认为分钟，单位有 '年' '月' '小时' '分' '秒'
+   * @param {number} [time=5] - 禁言时长，默认为 300。如果传入 0 则表示解除禁言。
+   * @param {string} [unit='秒'] - 禁言时长单位，默认为秒，单位有 '年' '月' '小时' '分' '秒'
    * @returns {Promise<string>} - 返回操作结果
    * @throws {Error} - 如果缺少必要参数或参数格式不正确，则会抛出错误
    */
-  async muteMember (groupId, userId, executor, time = 5, unit = '分') {
+  async muteMember (groupId, userId, executor, time = 300, unit = '秒') {
     unit = Time_unit[unit.toUpperCase()] ?? (/^\d+$/.test(unit) ? unit : 60)
     let group = this.Bot.pickGroup(Number(groupId), true)
     // 判断是否有管理
