@@ -99,7 +99,7 @@ export class _GroupBannedWords extends plugin {
         `触发违禁词：${keyWordTran.substr(0, 2) + '*'.repeat(keyWordTran.length - 2)}\n`,
         `触发者：${senderCard}(${e.user_id})\n`,
         `执行：${groupPenaltyAction[data.penaltyType]}`
-      ])
+      ], false, { recallMsg: 30 })
     }
   }
 
