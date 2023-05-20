@@ -4,7 +4,7 @@
 
 body {
   transform: scale(1);
-  width: 600px;
+  width: 1200px;
   background: url("./imgs/background/default.jpg");
 }
 
@@ -12,7 +12,7 @@ body {
   background: url("./imgs/background/bg17.PNG") right center no-repeat;
   background-size: cover;
   padding: 20px 35px 10px 25px;
-  width: 600px;
+  width: 1200px;
 }
 
 .head-box {
