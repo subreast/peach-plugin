@@ -14,7 +14,7 @@ class Config {
   constructor() {
     this.config = {}
     /** 监听文件 */
-    this.watcher = { config: {} }
+    this.watcher = { config: {}, defSet: {} }
 
     this.initCfg()
   }
@@ -31,7 +31,7 @@ class Config {
     const files = fs.readdirSync(pathDef).filter(file => file.endsWith('.yaml'))
     for (let file of files) {
       if (!fs.existsSync(`${path}${file}`)) {
-        fs.copyFileSync(`${pathDef}${file}`, `${path}${file}`) // 从config/default_config/复制文件到/config/config/
+        fs.copyFileSync(`${pathDef}${file}`, `${path}${file}`)
       }
       this.watch(`${path}${file}`, file.replace('.yaml', ''), 'config')
     }
@@ -45,10 +45,12 @@ class Config {
   getGroup(groupId = '') {
     let config = this.getConfig('whole')
     let group = this.getConfig('group')
+    let defCfg = this.getdefSet('whole')
+
     if (group[groupId]) {
-      return { ...config, ...group[groupId] }
+      return { ...defCfg, ...config, ...group[groupId] }
     }
-    return { ...config }
+    return { ...defCfg, ...config }
   }
 
   /**
@@ -75,8 +77,9 @@ class Config {
    * @returns 文件中全部的key值
    */
   getDefOrConfig(name) {
+    let def = this.getdefSet(name)
     let config = this.getConfig(name)
-    return { ...config }
+    return { ...def, ...config }
   }
 
   /** 进群验证配置 */
@@ -92,6 +95,11 @@ class Config {
   /** 加群通知 */
   get groupAdd() {
     return this.getDefOrConfig('groupAdd')
+  }
+
+  /** 默认配置 */
+  getdefSet(name) {
+    return this.getYaml('default_config', name)
   }
 
   /** 用户配置 */
@@ -120,7 +128,7 @@ class Config {
   }
 
   /** 监听配置文件 */
-  watch(file, name, type = 'config') {
+  watch(file, name, type = 'default_config') {
     let key = `${type}.${name}`
 
     if (this.watcher[key]) return
@@ -129,7 +137,7 @@ class Config {
     watcher.on('change', path => {
       delete this.config[key]
       if (typeof Bot == 'undefined') return
-      logger.mark(`[修改配置文件][${type}][${name}]`)
+      logger.mark(`[Yenai-Plugin][修改配置文件][${type}][${name}]`)
       if (this[`change_${name}`]) {
         this[`change_${name}`]()
       }
