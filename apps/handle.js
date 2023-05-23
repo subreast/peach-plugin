@@ -364,9 +364,9 @@ export class _Handle extends plugin {
       let success = []; let fail = []
       for (let i of SystemMsg) {
         if (await i.approve(yes)) {
-          success.push(`${success.length + 1}、${i.user_id}`)
+          success.push(`${success.length + 1}、${i.group_id}`)
         } else {
-          fail.push(`${fail.length + 1}、${i.user_id}`)
+          fail.push(`${fail.length + 1}、${i.group_id}`)
         }
         await common.sleep(1000)
       }
