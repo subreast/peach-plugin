@@ -19,10 +19,10 @@ Bot.on('notice.friend', async (e) => {
     }
     case 'decrease': {
       if (!Config.getWhole.friendNumberChange) return false
-      logger.mark('好友被删除')
+      logger.mark('好友删除')
       msg = [
         segment.image(`https://q1.qlogo.cn/g?b=qq&s=100&nk=${e.user_id}`),
-        '[通知 - 好友被删除]\n',
+        '[通知 - 好友删除]\n',
         `好友QQ：${e.user_id}\n`,
         `好友昵称：${e.nickname}`
       ]
