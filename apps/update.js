@@ -64,7 +64,7 @@ export class _Update extends plugin {
     const _path = './plugins/peach-plugin/'
     let command = `git -C ${_path} pull --no-rebase`
     if (isForce) {
-      command = `git -C ${_path} fetch --all && git -C ${_path} reset --hard HEAD`
+      command = `git fetch --all && git reset --hard && ${command}`
       this.e.reply('正在执行强制更新操作，请稍等')
     } else {
       this.e.reply('正在执行更新操作，请稍等')
