@@ -41,7 +41,7 @@ export class _Assistant extends plugin {
           permission: 'master'
         },
         {/**4 */
-          reg: '^#?(修|更)?改状态.*$',
+          reg: '^#?(修|更)?改(在线)?状态.*$',
           fnc: 'SetOnlineStatus',
           permission: 'master'
         },
@@ -212,7 +212,7 @@ export class _Assistant extends plugin {
 
   /**4 (修|更)改状态 */
   async SetOnlineStatus(e) {
-    let signs = e.msg.replace(/#|更|修|改状态/g, '').trim()
+    let signs = e.msg.replace(/#|更|修|改|在线|状态|/g, '').trim()
     if (!signs) return e.reply('❎ 状态不能为空，可选值：\n我在线上\n离开\n隐身\n忙碌\nQ我吧\n请勿打扰')
     let statusMirr = _.invert(status) //快速查找一个值对应的键
     if (!(signs in statusMirr)) return e.reply('❎ 可选值：我在线上，离开，隐身，忙碌，Q我吧，请勿打扰')
