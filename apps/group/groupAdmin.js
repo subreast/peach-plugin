@@ -165,6 +165,10 @@ export class _GroupAdmin extends plugin {
     this.task = redisTask
   }
 
+  get Bot() {
+    return this.e.bot ?? Bot
+  }
+
 
   /** 1.禁言 */
   async muteMember(e) {
