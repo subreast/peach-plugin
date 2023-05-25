@@ -96,8 +96,8 @@ export class _GroupAdmin extends plugin {
           reg: `^#?(查看|获取)?最近的?入群(情况|记录)(${Numreg})?$`,
           fnc: 'RankingList'
         },
-        {/**17 */
-          reg: Autisticreg, // 我要自闭
+        {/**17我要自闭*/
+          reg: Autisticreg, 
           fnc: 'Autistic'
         },
         {/**18 */
