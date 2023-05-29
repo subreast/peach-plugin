@@ -351,7 +351,7 @@ export class _GroupAdmin extends plugin {
     let text = e.msg.replace(/#?修改头衔/g, '')
     let res = await e.group.setTitle(qq, text)
     if (res) {
-      e.reply(`已经把这个小可爱的头衔设置为「${text}」辣`)
+      e.reply(`已经把这个小可爱的头衔修改为「${text}」辣`)
     } else {
       e.reply('额...没给上不知道发生了神魔')
     }
