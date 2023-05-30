@@ -7,7 +7,7 @@ import { common } from '../lib/index.js'
 import { Time_unit, ROLE_MAP } from '../constants/other.js'
 
 
-// 机器人不是管理文案
+// 机器人不是管理时候的文案
 const ROLE_ERROR = '我连管理员都木有，这种事怎么可能做到的辣！！！'
 
 export default class {
@@ -28,7 +28,7 @@ export default class {
    * @returns {Promise<string>} - 返回操作结果
    * @throws {Error} - 如果缺少必要参数或参数格式不正确，则会抛出错误
    */
-  async muteMember (groupId, userId, executor, time = 300, unit = '秒') {
+  async muteMember(groupId, userId, executor, time = 300, unit = '秒') {
     unit = Time_unit[unit.toUpperCase()] ?? (/^\d+$/.test(unit) ? unit : 60)
     let group = this.Bot.pickGroup(Number(groupId), true)
     // 判断是否有管理
