@@ -3,7 +3,7 @@ import _ from 'lodash'
 import fs from 'fs'
 import { common } from '../lib/index.js'
 import { Config, Data } from '../components/index.js'
-import request from '../lib/index.js'
+import { request } from '../lib/index.js'
 
 export default new class {
   constructor() {
