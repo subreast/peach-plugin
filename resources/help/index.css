@@ -8,15 +8,17 @@
 
 body {
   transform: scale(1);
-  width: 1200px;
+  width: 1100px;
   background: url("./imgs/background/default.jpg");
 }
 
 .container {
-  background: url("./imgs/background/bg17.PNG") right center no-repeat;
+  background-image: url("./imgs/background/bg17.PNG");
+  background-position: right center;
+  background-repeat: no-repeat;
   background-size: cover;
-  padding: 20px 35px 10px 25px;
-  width: 1200px;
+  padding: 20px 25px 10px 25px;
+  width: 1130px;
 }
 
 .head-box {
@@ -29,21 +31,15 @@ body {
 }
 
 .cont-box {
-  /* border-radius: 15px; */
   margin-top: 20px;
   margin-bottom: 30px;
   overflow: hidden;
   position: relative;
   font-size: 20px;
   background: rgba(255, 255, 255, 0.3);
-  box-shadow: 30px 30px 30px -10px rgba(0, 0, 0, 0.15),
-    inset 15px 15px 10px rgba(255, 255, 255, 0.75),
-    -15px -15px 35px rgba(255, 255, 255, 0.55),
-    inset -1px -1px 10px rgba(0, 0, 0, 0.2);
-  /* 毛玻璃 */
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-
+  box-shadow: 30px 30px 30px -10px rgba(0, 0, 0, 0.15), inset 15px 15px 10px rgba(255, 255, 255, 0.75), -15px -15px 35px rgba(255, 255, 255, 0.55), inset -1px -1px 10px rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 30px;
 }
 
@@ -52,7 +48,6 @@ body {
   font-weight: bold;
   padding: 15px 15px 10px 20px;
   display: inline-block;
-
 }
 
 .help-table {
@@ -90,14 +85,6 @@ body {
   width: 33%;
 }
 
-.help-table .tr:last-child .td {
-  padding-bottom: 12px;
-}
-
-.help-table .th {
-  background: rgba(34, 41, 51, 0.5);
-}
-
 .help-icon {
   width: 40px;
   height: 40px;
@@ -115,7 +102,6 @@ body {
   display: inline-block;
   font-size: 22px;
   line-height: 24px;
-
 }
 
 .help-desc {
