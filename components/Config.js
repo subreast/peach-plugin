@@ -70,9 +70,14 @@ class Config {
     return this.getDefOrConfig('whole')
   }
 
-  /** 默认配置和用户配置 */
+
+  /** 状态 */
+  get state() {
+    return this.getDefOrConfig('state')
+  }
+
   /**
-   * this
+   * 默认配置和用户配置
    * @param {*} name 要获取的配置文件名
    * @returns 文件中全部的key值
    */
@@ -96,6 +101,7 @@ class Config {
   get groupAdd() {
     return this.getDefOrConfig('groupAdd')
   }
+
 
   /** 默认配置 */
   getdefSet(name) {
