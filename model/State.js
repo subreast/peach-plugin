@@ -6,7 +6,7 @@ import { Config, Data } from '../components/index.js'
 import request from '../lib/index.js'
 
 export default new class {
-  constructor () {
+  constructor() {
     this.si = null
     this.osInfo = null
     // 是否可以获取gpu
@@ -47,7 +47,7 @@ export default new class {
     this.init()
   }
 
-  set network (value) {
+  set network(value) {
     if (_.isNumber(value[0]?.tx_sec) && _.isNumber(value[0]?.rx_sec)) {
       this._network = value
       this.addData(this.chartData.network.upload, [Date.now(), value[0].tx_sec])
@@ -55,11 +55,11 @@ export default new class {
     }
   }
 
-  get network () {
+  get network() {
     return this._network
   }
 
-  set fsStats (value) {
+  set fsStats(value) {
     if (_.isNumber(value?.wx_sec) && _.isNumber(value?.rx_sec)) {
       this._fsStats = value
       this.addData(this.chartData.fsStats.writeSpeed, [Date.now(), value.wx_sec])
@@ -67,11 +67,11 @@ export default new class {
     }
   }
 
-  get fsStats () {
+  get fsStats() {
     return this._fsStats
   }
 
-  async initDependence () {
+  async initDependence() {
     try {
       this.si = await import('systeminformation')
       this.osInfo = await this.si.osInfo()
@@ -90,7 +90,7 @@ export default new class {
     }
   }
 
-  async init () {
+  async init() {
     if (!await this.initDependence()) return
     const { controllers } = await this.si.graphics()
     // 初始化GPU获取
@@ -111,7 +111,7 @@ export default new class {
     }, 60000)
   }
 
-  async getData () {
+  async getData() {
     let data = await this.si.get(this.valueObject)
     _.forIn(data, (value, key) => {
       if (_.isEmpty(value)) {
@@ -144,7 +144,7 @@ export default new class {
    * @param {number} [maxLen=60] - 数组允许的最大长度，默认值为60
    * @returns {void}
    */
-  addData (arr, data, maxLen = 60) {
+  addData(arr, data, maxLen = 60) {
     if (data === null || data === undefined) return
     // 如果数组长度超过允许的最大值，删除第一个元素
     if (arr.length >= maxLen) {
@@ -163,7 +163,7 @@ export default new class {
   * @param {Number} [retryInterval=1000] 两次重试之间的等待时间，单位为毫秒。。
   * @return {Promise} 获取到的数据。如果达到最大重试次数且获取失败，则返回null。
   */
-  async fetchDataWithRetry (fetchFunc, params = [], timerId, maxRetryCount = 3, retryInterval = 1000) {
+  async fetchDataWithRetry(fetchFunc, params = [], timerId, maxRetryCount = 3, retryInterval = 1000) {
     let retryCount = 0
     let data = null
     while (retryCount <= maxRetryCount) {
@@ -190,7 +190,7 @@ export default new class {
   * @param {boolean} [isSuffix=true] - 如果为 true，则在所得到的大小后面加上 kb、mb、gb、tb 等后缀.
   * @returns {string} 文件大小格式转换后的字符串.
   */
-  getFileSize (size, isByte = true, isSuffix = true) { // 把字节转换成正常文件大小
+  getFileSize(size, isByte = true, isSuffix = true) { // 把字节转换成正常文件大小
     if (size == null || size == undefined) return 0
     let num = 1024.00 // byte
     if (isByte && size < num) {
@@ -213,7 +213,7 @@ export default new class {
     * @param {Number} res 百分比小数
     * @return {*} css样式
   */
-  Circle (res) {
+  Circle(res) {
     let num = (res * 360).toFixed(0)
     let color = 'var(--low-color)'
     if (res >= 0.9) {
@@ -232,7 +232,7 @@ export default new class {
   }
 
   /** 获取nodejs内存情况 */
-  getNodeInfo () {
+  getNodeInfo() {
     let memory = process.memoryUsage()
     // 总共
     let rss = this.getFileSize(memory.rss)
@@ -255,7 +255,7 @@ export default new class {
   }
 
   /** 获取当前内存占用 */
-  getMemUsage () {
+  getMemUsage() {
     // 内存使用率
     let MemUsage = (1 - os.freemem() / os.totalmem()).toFixed(2)
     // 空闲内存
@@ -278,7 +278,7 @@ export default new class {
   }
 
   /** 获取CPU占用 */
-  async getCpuInfo () {
+  async getCpuInfo() {
     let { currentLoad: { currentLoad }, cpuCurrentSpeed } = await this.si.get({
       currentLoad: 'currentLoad',
       cpuCurrentSpeed: 'max,avg'
@@ -302,7 +302,7 @@ export default new class {
   }
 
   /** 获取GPU占用 */
-  async getGPU () {
+  async getGPU() {
     if (!this.isGPU) return false
     try {
       const { controllers } = await this.si.graphics()
@@ -339,7 +339,7 @@ export default new class {
    * @description: 获取硬盘
    * @return {*}
    */
-  async getFsSize () {
+  async getFsSize() {
     // 去重
     let HardDisk = _.uniqWith(await this.si.fsSize(),
       (a, b) =>
@@ -364,7 +364,7 @@ export default new class {
   }
 
   /** 获取FastFetch */
-  async getFastFetch (e) {
+  async getFastFetch(e) {
     if (process.platform == 'win32' && !/pro/.test(e.msg)) return ''
     let ret = await common.execSync('bash plugins/yenai-plugin/resources/state/state.sh')
     if (ret.error) {
@@ -375,7 +375,7 @@ export default new class {
   }
 
   // 获取读取速率
-  get DiskSpeed () {
+  get DiskSpeed() {
     if (!this.fsStats ||
       this.fsStats.rx_sec == null ||
       this.fsStats.wx_sec == null
@@ -392,7 +392,7 @@ export default new class {
    * @description: 获取网速
    * @return {object}
    */
-  get getnetwork () {
+  get getnetwork() {
     let network = _.cloneDeep(this.network)?.[0]
     if (!network || network.rx_sec == null || network.tx_sec == null) {
       return false
@@ -410,7 +410,7 @@ export default new class {
  * @description: 取插件包
  * @return {*} 插件包数量
  */
-  get getPluginNum () {
+  get getPluginNum() {
     let str = './plugins'
     let arr = fs.readdirSync(str)
     let plugin = []
@@ -434,7 +434,7 @@ export default new class {
     }
   }
 
-  async getNetworkLatency (url, timeoutTime = 5000) {
+  async getNetworkLatency(url, timeoutTime = 5000) {
     const AbortController = globalThis.AbortController || await import('abort-controller')
 
     const controller = new AbortController()
