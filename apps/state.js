@@ -39,7 +39,7 @@ export class _State extends plugin {
       })
     }
 
-    if (!/桃子/.test(e.msg) && !Config.whole.state) return false
+    if (!/桃子/.test(e.msg) && !Config.getWhole.state) return false
 
     if (!State.si) return e.reply('❎ 没有检测到systeminformation依赖，请运行："pnpm add systeminformation -w"进行安装')
 
